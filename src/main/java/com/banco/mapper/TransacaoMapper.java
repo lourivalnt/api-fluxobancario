@@ -8,11 +8,6 @@ import java.util.List;
 
 /**
  * Mapper responsável por converter Transacao em DTOs.
- *
- * Implementado com MapStruct para:
- * - reduzir código boilerplate
- * - gerar código em tempo de compilação
- * - garantir melhor performance e tipagem forte
  */
 @Mapper(componentModel = "spring")
 public interface TransacaoMapper {

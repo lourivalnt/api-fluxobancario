@@ -11,12 +11,12 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.UUID;
 
 @Service
-@RequiredArgsConstructor
 @Transactional(readOnly = true)
+@RequiredArgsConstructor
 public class ExtratoServiceImpl implements ExtratoService {
 
     private final TransacaoRepository transacaoRepository;
-    private final ExtratoMapper transacaoMapper;
+    private final ExtratoMapper extratoMapper;
 
     @Override
     public ExtratoResponse emitirExtrato(UUID contaId) {
@@ -24,6 +24,6 @@ public class ExtratoServiceImpl implements ExtratoService {
         var transacoes = transacaoRepository
                 .findByContaIdOrderByDataHoraDesc(contaId);
 
-        return transacaoMapper.toResponse(transacoes);
+        return extratoMapper.toResponse(transacoes);
     }
 }

@@ -2,30 +2,31 @@ package com.banco.mapper;
 
 import com.banco.domain.entity.Transacao;
 import com.banco.dto.response.ExtratoResponse;
-
+import com.banco.dto.response.TransacaoResponse;
 import org.mapstruct.Mapper;
-import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.List;
 
 /**
  * Mapper responsável por montar o extrato bancário.
- *
- * Usa MapStruct para mapear as transações
- * e método default para compor o DTO agregado.
+ * "Usei o MapStruct pra converter cada transação individual.
+ * Depois, com método default, juntei todas no formato de extrato
+ * que a tela precisa."
  */
-@Mapper(componentModel = "spring")
-public abstract class ExtratoMapper {
+@Mapper(
+        componentModel = "spring",
+        uses = TransacaoMapper.class
+)
+public interface ExtratoMapper {
 
-    @Autowired
-    protected TransacaoMapper transacaoMapper;
+    List<TransacaoResponse> toTransacaoResponseList(List<Transacao> transacoes);
 
     /**
-     * Converte lista de Transacao em ExtratoResponse.
+     * Método default (Java puro) para montar o DTO agregado.
      */
-    public ExtratoResponse toResponse(List<Transacao> transacoes) {
+    default ExtratoResponse toResponse(List<Transacao> transacoes) {
         return new ExtratoResponse(
-                transacaoMapper.toResponseList(transacoes)
+                toTransacaoResponseList(transacoes)
         );
     }
 }
