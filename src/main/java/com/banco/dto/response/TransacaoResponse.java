@@ -1,7 +1,6 @@
 package com.banco.dto.response;
 
 import com.banco.domain.enums.TipoTransacao;
-import lombok.*;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;

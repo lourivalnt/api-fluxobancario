@@ -1,7 +1,5 @@
 package com.banco.dto.response;
 
-import lombok.*;
-
 import java.util.List;
 
 /**

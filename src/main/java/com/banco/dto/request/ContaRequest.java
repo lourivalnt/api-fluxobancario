@@ -1,7 +1,6 @@
 package com.banco.dto.request;
 
 import jakarta.validation.constraints.NotBlank;
-import lombok.*;
 
 /**
  * DTO usado para criação de uma nova conta.

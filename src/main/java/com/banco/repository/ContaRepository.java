@@ -31,7 +31,7 @@ public interface ContaRepository extends JpaRepository<Conta, UUID> {
     Optional<Conta> findContaById(UUID id);
 }
 // CENÁRIO PERIGOSO:
-// Thread 1: Lê saldo = R$ 1000
-// Thread 2: Lê saldo = R$ 1000 (ao mesmo tempo!)
-// Thread 1: Debita R$ 500 → saldo = R$ 500
-// Thread 2: Debita R$ 300 → saldo = R$ 700 (❌ DEVERIA SER R$ 200!)
+// 1: Lê saldo = R$ 1000
+// 2: Lê saldo = R$ 1000 (ao mesmo tempo!)
+// 1: Debita R$ 500 → saldo = R$ 500
+// 2: Debita R$ 300 → saldo = R$ 700 (❌ DEVERIA SER R$ 200!)
