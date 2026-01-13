@@ -9,7 +9,7 @@ import jakarta.validation.constraints.NotBlank;
  * para a operação, sem expor a entidade.
  * Record é ideal aqui pois representa apenas dados imutáveis.
  */
-public record ContaRequest(
+public record CriarContaRequest(
 
         @NotBlank(message = "O nome do titular é obrigatório")
         String titular
