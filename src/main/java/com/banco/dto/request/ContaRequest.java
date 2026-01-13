@@ -8,14 +8,10 @@ import lombok.*;
  *
  * Representa apenas os dados necessários
  * para a operação, sem expor a entidade.
+ * Record é ideal aqui pois representa apenas dados imutáveis.
  */
-@Getter
-@Setter
-@NoArgsConstructor
-@AllArgsConstructor
-@Builder
-public class ContaRequest {
+public record ContaRequest(
 
-    @NotBlank(message = "O nome do titular é obrigatório")
-    private String titular;
-}
+        @NotBlank(message = "O nome do titular é obrigatório")
+        String titular
+) {}

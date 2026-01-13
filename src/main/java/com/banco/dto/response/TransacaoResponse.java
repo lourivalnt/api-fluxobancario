@@ -10,16 +10,10 @@ import java.util.UUID;
 /**
  * DTO que representa um item do extrato bancário.
  */
-@Getter
-@Setter
-@NoArgsConstructor
-@AllArgsConstructor
-@Builder
-public class TransacaoResponse {
-
-    private UUID id;
-    private TipoTransacao tipo;
-    private BigDecimal valor;
-    private LocalDateTime dataHora;
-}
+public record TransacaoResponse(
+        UUID id,
+        TipoTransacao tipo,
+        BigDecimal valor,
+        LocalDateTime dataHora
+) {}
 

@@ -10,21 +10,16 @@ import java.util.UUID;
 /**
  * DTO para transferência entre contas.
  */
-@Getter
-@Setter
-@NoArgsConstructor
-@AllArgsConstructor
-@Builder
-public class TransferenciaRequest {
+public record TransferenciaRequest(
 
-    @NotNull(message = "Conta de origem é obrigatória")
-    private UUID contaOrigemId;
+        @NotNull(message = "Conta de origem é obrigatória")
+        UUID contaOrigemId,
 
-    @NotNull(message = "Conta de destino é obrigatória")
-    private UUID contaDestinoId;
+        @NotNull(message = "Conta de destino é obrigatória")
+        UUID contaDestinoId,
 
-    @NotNull(message = "O valor é obrigatório")
-    @DecimalMin(value = "0.01", message = "O valor deve ser maior que zero")
-    private BigDecimal valor;
-}
+        @NotNull(message = "O valor é obrigatório")
+        @DecimalMin(value = "0.01", message = "O valor deve ser maior que zero")
+        BigDecimal valor
+) {}
 

@@ -7,13 +7,10 @@ import java.util.List;
 /**
  * DTO de resposta para o extrato bancário.
  */
-@Getter
-@Setter
-@NoArgsConstructor
-@AllArgsConstructor
-@Builder
-public class ExtratoResponse {
-
-    private List<TransacaoResponse> transacoes;
-}
-
+public record ExtratoResponse(
+        List<TransacaoResponse> transacoes
+) {}
+// Tudo implícito: private final fields
+// Tudo implícito: getters (contaOrigemId(), contaDestinoId(), valor())
+// Tudo implícito: equals(), hashCode(), toString()
+// Tudo implícito: construtor com todos parâmetros
