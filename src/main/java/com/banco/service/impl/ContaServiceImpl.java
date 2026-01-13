@@ -3,6 +3,8 @@ package com.banco.service.impl;
 import com.banco.domain.entity.Conta;
 import com.banco.domain.entity.Transacao;
 import com.banco.domain.enums.TipoTransacao;
+import com.banco.exception.ContaNaoEncontradaException;
+import com.banco.exception.SaldoInsuficienteException;
 import com.banco.repository.ContaRepository;
 import com.banco.repository.TransacaoRepository;
 import com.banco.service.ContaService;
@@ -101,7 +103,7 @@ public class ContaServiceImpl implements ContaService {
      */
     private Conta buscarConta(UUID contaId) {
         return contaRepository.findContaById(contaId)
-                .orElseThrow(() -> new IllegalArgumentException("Conta não encontrada"));
+                .orElseThrow(() -> new ContaNaoEncontradaException(contaId));
     }
 
     /**
@@ -109,7 +111,7 @@ public class ContaServiceImpl implements ContaService {
      */
     private void validarSaldo(Conta conta, BigDecimal valor) {
         if (conta.getSaldo().compareTo(valor) < 0) {
-            throw new IllegalStateException("Saldo insuficiente");
+            throw new SaldoInsuficienteException("Saldo insuficiente");
         }
     }
 }
