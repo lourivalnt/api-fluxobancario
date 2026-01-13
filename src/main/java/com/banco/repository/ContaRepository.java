@@ -21,7 +21,7 @@ public interface ContaRepository extends JpaRepository<Conta, UUID> {
     /**
      * Busca a conta aplicando lock pessimista de escrita.
      *
-     * Esse método é usado em operações críticas como:
+     * Esse método é usado em operações como:
      * - débito
      * - transferência
      *
@@ -35,3 +35,18 @@ public interface ContaRepository extends JpaRepository<Conta, UUID> {
 // 2: Lê saldo = R$ 1000 (ao mesmo tempo!)
 // 1: Debita R$ 500 → saldo = R$ 500
 // 2: Debita R$ 300 → saldo = R$ 700 (❌ DEVERIA SER R$ 200!)
+
+//OUTRA SITUAÇÂO
+// SALDO INICIAL: R$ 1000
+// Thread 1 (Caixa A): Quer sacar R$ 800
+// Thread 2 (Caixa B): Quer sacar R$ 600
+
+// SEM CONTROLE DE CONCORRÊNCIA:
+/*Thread 1: Lê saldo → R$ 1000
+Thread 2: Lê saldo → R$ 1000 (leu ao mesmo tempo!)
+Thread 1: Calcula novo saldo → 1000 - 800 = R$ 200
+Thread 2: Calcula novo saldo → 1000 - 600 = R$ 400
+Thread 1: Salva R$ 200
+Thread 2: Salva R$ 400 (SOBRESCREVE!)*/
+
+// RESULTADO FINAL: R$ 400 (❌ DEVERIA SER R$ -400 - CONTA NEGATIVADA!)

@@ -8,7 +8,7 @@ import com.banco.exception.SaldoInsuficienteException;
 import com.banco.repository.ContaRepository;
 import com.banco.repository.TransacaoRepository;
 import com.banco.service.ContaService;
-import jakarta.transaction.Transactional;
+import org.springframework.transaction.annotation.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
